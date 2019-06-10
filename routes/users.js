@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
-var users =  require('../models/User')
+var users =  require('../models/User');
+var patient = require('../models/Patient');
 
 /* GET users listing. */
 router.get('/users', function(req, res, next) {
@@ -18,7 +19,7 @@ router.get('/users', function(req, res, next) {
 
 router.get('/:username', function(req,res,next){
   console.log(req.params.username);
-  var username = req.params.username || "";
+  var username = req.body.username || "";
   if (username == ""){
     res.status(400).json({
       "success1": false
@@ -65,6 +66,47 @@ router.put('/', function(req,res,next){
   })
 
 })
+
+router.put('/user/patient', function(req,res,next){
+  
+  var username = req.body.username || "";
+  if(username == ""){
+    res.status(400).json({
+      "success":false
+    })
+  }else{
+    let patientDat = {
+      name: req.body.name,
+      date: req.body.date,
+      level: req.body.level
+    }
+    
+    var iPatient = new patient(patientDat)
+    users.findOne({username: username}, (err, user)=>{
+      if(err){
+        res.status(400).json({
+          "success": false
+        })
+      }else{
+        console.log(iPatient)
+        user.patients.push(iPatient)
+        user.save((err, iUser)=>{
+          if(err){
+            res.status(400).json({
+              "success": false
+            })
+          }else{
+            res.status(200).json({
+              "success": true,
+              "userInserted": iUser
+            })
+          }
+        })
+      }
+    })
+  }
+})
+
 
 
 module.exports = router;

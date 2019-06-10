@@ -1,18 +1,12 @@
 const mongoose = require('mongoose'),
-    Schema = mongoose.Schema;
-
-let Patient = new Schema({
-    name: String,
-    date: Date,
-    level: Number
-});
+    Schema = mongoose.Schema
+    patient = require('../models/Patient');
 
 let User = new Schema({
-    username: String,
-    password: String,
-    type: Number,
-    patients: [Patient]
+    username: {type: String, required: true, unique: true},
+    password: {type: String, required: true},
+    type: {type: Number, required: true},
+    patients: [patient.schema]
 
 })
-
 module.exports = mongoose.model('user', User)
