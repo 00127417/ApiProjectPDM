@@ -8,7 +8,7 @@ let Question = new Schema({
     answer: String,
     optiona: String,
     optionb: String,
-    opctionc: String
+    optionc: String
 })
 
 module.exports = mongoose.model('question', Question)
