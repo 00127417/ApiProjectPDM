@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var users =  require('../models/User');
+var items = require('../models/Item');
+var ques = require('../models/Question');
 var patient = require('../models/Patient');
 
 /* GET users listing. */
@@ -78,7 +80,9 @@ router.put('/user/patient', function(req,res,next){
     let patientDat = {
       name: req.body.name,
       date: req.body.date,
-      level: req.body.level
+      level: req.body.level,
+      items:[ {sound:'A.mp3', level: 1, success: 0},
+      {sound:'E.mp3', level: 1, success: 0}]
     }
     
     var iPatient = new patient(patientDat)
@@ -106,7 +110,4 @@ router.put('/user/patient', function(req,res,next){
     })
   }
 })
-
-
-
 module.exports = router;

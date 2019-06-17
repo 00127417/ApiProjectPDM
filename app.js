@@ -6,6 +6,8 @@ var logger = require('morgan');
 
 var usersRouter = require('./routes/users');
 
+var itemsRouter = require('./routes/items')
+
 const mongoose = require('mongoose')
 
 const admin = require("firebase-admin");
@@ -42,6 +44,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 
 app.use('/cocleapp', usersRouter);
+app.use('/cocleapp', itemsRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
