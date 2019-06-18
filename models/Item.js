@@ -3,6 +3,7 @@ const mongoose = require('mongoose'),
 
 let Item = new Schema({
     number: Number,
+    name: String,
     sound: String,
     level: Number
 })

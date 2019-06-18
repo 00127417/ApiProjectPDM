@@ -6,6 +6,7 @@ router.put('/item', function(req,res,next){
 
     let data = {
       number: req.body.number,
+      name: req.body.name,
       sound: req.body.sound,
       level: req.body.level
     }
