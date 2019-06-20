@@ -3,7 +3,6 @@ const mongoose = require('mongoose'),
 
 let Question = new Schema({
     number: Number,
-    name: String,
     sound: String,
     level: Number,
     answer: String,
